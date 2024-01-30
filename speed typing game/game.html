@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typing game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .nav {
+            height: 20vh;
+            width: 100%;
+            background-color: rgb(114, 203, 238);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            letter-spacing: 3px;
+        }
+        .mainbox {
+            height: 80vh;
+            width: 100%;
+            background-color: rgb(36, 35, 35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .text {
+            color: white;
+        }
+        .words {
+            border: 1px solid #c9c4c4;
+            height: 50px;
+            width: 200px;
+            margin-top: 20px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .text1 {
+            color: white;
+            margin-top: 20px;
+        }
+        #select {
+            padding: 5px;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        .input {
+            width: 300px;
+            height: 30px;
+            margin-top: 20px;
+        }
+        .text2 {
+            color: red;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        .div {
+            width: 230px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            color: white;
+            margin-top: 20px;
+        }
+        .div1 {
+            width: 280px;
+            background-color: rgb(59, 59, 59);
+            color: white;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .text3 {
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">Speed Typing Lite</div>
+    <div class="mainbox">
+        <p class="text">Type the following word in <strong class="current-Level">6</strong> seconds:</p>
+        <div class="words"></div>
+        <p class="text1">Difficult</p>
+        <select id="select">
+            <option value="simple">simple</option>
+            <option value="tough">tough</option>
+            <option value="difficult">difficult</option>
+        </select>
+        <input class="input" type="text" />
+        <div class="text2"></div>
+        <div class="div">
+            <p>Time Left : &nbsp; <span class="time-left">0</span></p>
+            <p>Score : &nbsp; <span class="score">0</span></p>
+        </div>
+        <div class="div1">
+            <h3>Instructions</h3>
+            <p class="text3">Type each word in the given amount of time to score. To play again , just type the current
+                word. your score will reset.</p>
+        </div>
+    </div>
+
+    <script>
+
+
+        let currentLevelEl = document.querySelector(".current-Level")
+        let words = document.querySelector(".words")
+        let select = document.querySelector("#select")
+        let input = document.querySelector(".input")
+        let text2 = document.querySelector(".text2")
+        let timeleft = document.querySelector(".time-left")
+        let score = document.querySelector(".score")
+        let WordsArray = ["sparrow", "eagle", "elephant", "parrots", "pegeon"]
+        let scoreValue = 0
+        let levels = {
+            simple: 6,
+            tough: 4,
+            difficult: 2
+        }
+        let currentLevels = levels.simple
+        let timeCount = currentLevels + 1
+        let WordDisplay
+        let isplaying
+        window.addEventListener("load", showWord)
+        input.addEventListener("input", startMatchingWord)
+        select.addEventListener("change", (e) => Levelchange(e))
+        function showWord() {
+            let random = Math.floor(Math.random() * WordsArray.length)
+            console.log(random);
+            WordDisplay = WordsArray[random]
+            console.log(WordDisplay);
+            words.innerHTML = WordDisplay
+            input.focus()
+            setInterval(timeCountDown, 1000)
+        }
+        function timeCountDown(){
+            if(  timeCount > 0  ){
+                timeCount--
+                timeleft.innerHTML = timeCount
+            }
+            else{
+                isplaying = false
+            }
+        }
+        function startMatchingWord(){
+            if(  this.value == WordDisplay   ){
+                scoreValue++
+                score.innerHTML = scoreValue
+                text2.innerHTML = "Correct"
+                text2.style.color = "green" 
+                this.value = ""
+                showWord()
+            }
+            else{
+                text2.innerHTML = "Time Up"
+                text2.style.color = "red"
+            }
+        }
+        function Levelchange(e) {
+            let level = e.target.value
+            console.log(level);
+            input.focus()
+            if (level == "simple") {
+                currentLevelEl.innerHTML = levels.simple
+                currentLevels = levels.simple
+                timeCount = currentLevels + 1
+                isplaying = true
+                timeleft.innerHTML = timeCount
+                timeCountDown(timeCount)
+            }
+            if (level == "tough") {
+                currentLevelEl.innerHTML = levels.tough
+                currentLevels = levels.tough
+                timeCount = currentLevels + 1
+                timeleft.innerHTML = timeCount
+                isplaying = true
+            }
+            if (level == "difficult") {
+                currentLevelEl.innerHTML = levels.difficult
+                currentLevels = levels.difficult       
+                timeCount = currentLevels + 1
+                timeleft.innerHTML = timeCount
+                isplaying = true
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Generating</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: skyblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            color: blue;
+            font-size: 50px;
+        }
+        .box{
+            height: 50%;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+        .btn{
+            width: max-content;
+            padding: 10px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>Play the sound</h1>
+        <div class="box">
+            <button class="btn" id="piano">PIANO</button>
+            <button class="btn" id="guitar">GUITAR</button>
+            <button class="btn" id="flute">FLUTE</button>
+        </div>
+    </div>
+    <script>
+        let btn = document.querySelectorAll(".btn")
+        let check = null
+        document.addEventListener("DOMContentLoaded", initial)
+            function initial(){
+                for(let play of btn){
+                    play.addEventListener("click", function(e){
+                        let getid = e.target.id
+                        playsound(getid)
+                    })
+                }
+            }
+        document.addEventListener("keypress", (e)=>{
+            if(e.key == "q" || e.key == "w" || e.key == "e" || e.key == "r" || e.key == "t" || e.key == "y" || e.key == "u" || e.key == "i" || e.key == "o" || e.key == "p"){
+                playsound("piano")
+            }
+            else if (e.key == "a" || e.key == "s" || e.key == "d" || e.key == "f" || e.key == "g" || e.key == "h" || e.key == "j" || e.key == "k" || e.key == "l"){
+                playsound("guitar")
+            }
+            else if(e.key == "z" || e.key == "x" || e.key == "c" || e.key == "v" || e.key == "b" || e.key == "n" || e.key == "m"){
+                playsound("flute")
+            }
+        } )    
+        function playsound(name){
+           let ad = new Audio(name + ".mp3") 
+           if (check){
+            check.pause()
+           }
+           check = ad
+           ad.play()
+        }
+    </script>
+</body>
+</html>

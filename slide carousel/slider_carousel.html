@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carousel slider</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .main{
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(236, 255, 127);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-box{
+        height: 70%;
+        width: 40%;
+        /* border: 1px solid #000; */
+    }
+    .box{
+        height: 90%;
+        width: 100%;
+        /* border: 1px solid #000; */
+        overflow: hidden;
+    }
+    .slider{
+        height: 100%;
+        width: 600%;
+        /* border: 1px solid #ce1818; */
+        display: flex;
+        transition: all 0.3s linear;
+    }
+    .slide{
+        height: 100%;
+        width: 16.65%;
+        /* border: 1px solid #2d2ae9; */
+    }
+    .image1{
+        height: 100%;
+        width: 100%;
+    }
+    .left, .right{
+        height: 10%;
+        width: 49.6%;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="main-box">
+            <div class="box">
+                <div class="slider">
+                    <div class="slide">
+                    <img class="image1" src="./360_F_547978128_vqEEUYBr1vcAwfRAqReZXTYtyawpgLcC.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img class="image1"  src="./forest-landscape_71767-127 (1).avif" alt="">
+                </div>
+                <div class="slide">
+                    <img class="image1"  src="./images (1).jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img class="image1"  src="./images.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img class="image1"  src="./lake-blue-moonlight-moon-wallpaper-preview.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img class="image1"  src="./nature-3082832_640.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <button class="left">LEFT</button>
+        <button class="right">RIGHT</button>
+
+        </div>
+    </div>
+    <script>
+
+
+        
+        let slider = document.querySelector(".slider");
+        let slide = document.querySelectorAll(".slide");
+        let left = document.querySelector(".left");
+        let right = document.querySelector(".right");
+        let indx = 0;
+
+        function nextSlide() {
+            indx++
+            if(indx > slide.length - 1){
+                indx = 0
+            }
+            slider.style.marginLeft = `-${indx * 100}%`
+        }
+            let interv = setInterval( nextSlide, 3000  )
+        left.addEventListener("click",function(){
+            indx--
+            if(  indx < 0  ){
+                indx = slide.length - 1   
+            }
+            slider.style.marginLeft = `-${indx * 100}%`
+            clearInterval(interv)
+            interv = setInterval( nextSlide, 3000  )
+        })
+        right.addEventListener("click", function(){
+            indx++
+          if(indx > slide.length -1){
+            indx = 0
+          }
+          slider.style.marginLeft = `-${indx * 100}%`
+          clearInterval(interv)
+          interv=setInterval(nextSlide,3000)
+            console.log(right);
+        })
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTIFICATION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main {
+            height: 100vh;
+            width: 100%;
+            background-color: darkcyan;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circle {
+            height: 60px;
+            width: 60px;
+            border: 5px solid gray;
+            border-top: 5px solid black;
+            border-radius: 50%;
+            display: block;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .div {
+            padding: 20px;
+            width: 450px;
+            background-color: aliceblue;
+            box-shadow: 2px 10px 10px 10px rgba(26, 172, 172, 0.623);
+            display: none;
+        }
+        .button {
+            padding: 10px;
+            background-color: grey;
+            color: white;
+            margin-left: 70%;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="circle"></div>
+        <div class="div">
+            <h1 class="heading"></h1>
+            <button class="button">New Quote</button>
+        </div>
+    </div>
+    <script>
+        let array = ["Change in all things is sweet.", "Life shrink and expands in proportion to one's courage",
+            "Nothing is impossible the world itself says I'm possible", "All our dreams can come true, if we have the courage to pursue them"]
+        let circle = document.querySelector(".circle")
+        let div = document.querySelector(".div")
+        let heading = document.querySelector(".heading")
+        let button = document.querySelector(".button")
+        let random = Math.floor(Math.random() * array.length)
+        let randomquote = array[random]
+        console.log(randomquote);
+        console.log(random);
+        let intrv
+        button.addEventListener("click", () => {
+            location.reload()
+        })
+        setTimeout( timeOut, 2000  )
+        function timeOut() {
+            div.style.display = "block"
+            circle.style.display = "none"
+            heading.innerHTML = randomquote
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROGRESS</title>
+    <style>
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: aquamarine;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            height: 300px;
+            width: 40%;
+            background-color: blueviolet;
+            border: 1px solid #000;
+        }
+        .subbox1{
+            height: 80%;
+            width: 100%;
+            background-color: darksalmon;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .line{
+            height: 5px;
+            width: 100px;
+            background-color: black;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+            transition: all 0.3s linear;
+        }
+        .circles{
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            background-color: crimson;
+            z-index: 2;
+            transition: all 0.3s linear;
+        }
+        .active{
+            border: 2px solid #000;
+        }
+        button{
+            padding: 15px;
+            width: 49.5%;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="subbox1">
+                <div class="line"></div>
+                <div class="circles active"></div>
+                <div class="circles"></div>
+                <div class="circles"></div>
+                <div class="circles"></div>
+                <div class="circles"></div>
+            </div>
+            <div class="subbox2">
+                <button class="buttonBKW">Backward</button>
+                <button class="buttonFRW">Forward</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let line = document.querySelector(".line")
+        let circles = document.querySelectorAll(".circles")
+        let buttonBKW = document.querySelector(".buttonBKW")
+        let buttonFRW = document.querySelector(".buttonFRW")
+        let count = 1
+        buttonFRW.addEventListener("click", ()=>{
+            count++
+                if(count >= circles.length){
+                    count = circles.length
+                }
+                activecircle()
+            })
+            console.log(count);
+            buttonBKW.addEventListener("click", () => {
+                count--
+                if(count < 1){
+                    count = 1
+                }
+                activecircle()
+            })
+            function activecircle() {
+                circles.forEach((element, index) => {
+                    if (index < count ) {
+                        element.classList.add("active");
+                    }
+                     else {
+                        element.classList.remove("active")
+                    }
+                    })
+                    let activeclass = document.querySelectorAll(".active")
+                    line.style.width = `${((activeclass.length - 1 ) / (circles.length - 1) * 100)}%`
+                }
+        </script>
+    
+</body>
+</html>

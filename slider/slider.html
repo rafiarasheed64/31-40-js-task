@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        .main {
+            height: 100vh;
+            width: 100%;
+            background-color: cadetblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            height: 80%;
+            width: 27%;
+            /* border: 4px solid #000; */
+            background-color: white;
+        }
+
+        .sub-box {
+            height: 200px;
+            width: 100%;
+            /* border: 3px solid #d30f0f; */
+        }
+        .sub-box1{
+            height: max-content;
+            width: 85%;
+            padding: 20px;
+            /* border: 3px solid #d30f0f; */
+
+        }
+        .animation-clrs{
+
+            background: silver;
+            animation: moving 2s linear infinite;
+        }
+        @keyframes moving {
+            from{
+                background: linear-gradient(90deg, silver, gray);
+                background-position-x: 55%;
+            }
+            to{
+                
+                background: linear-gradient(90deg, gray, silver);
+                background-position-x: 100%;
+            }
+        }
+
+        .image1 {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* .heading {
+            color: white;
+            padding: 5px 15px;
+        }
+
+        .text {
+            color: white;
+            padding: 5px 15px;
+        } */
+        .heading{
+            height: 20px;
+            width: 85%;
+            /* margin-top: 0px; */
+            /* border: 1px solid #aa4e4e; */
+        }
+        .bx{
+            /* border: 1px solid #000; */
+        }
+        .text{
+            height: 15px;
+            width: 85%;
+            /* border: 1px solid #000; */
+        }
+        .bx1{
+            height: max-content;
+            /* border: 1px solid #000; */
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .circle{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            /* border: 1px solid #000; */
+        }
+        .content-div{
+            /* border: 1px solid #eb6666; */
+            width: 50%;
+            margin-left: 20px;
+        }
+        .text1{
+            height: 15px;
+            width: 50%;
+            margin: 7px;
+            /* border: 1px solid #000; */
+        }
+        .image2{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="sub-box animation-clrs">
+                <!-- <img class="image1" src="https://wallpapers.com/images/featured/laptop-murjp1nk4lp1idlt.jpg" alt=""> -->
+            </div>
+            <div class="sub-box1">
+                <h4 class="heading animation-clrs"></h4>
+                <div class="bx">
+                    <p class="text animation-clrs"></p>
+                    <p class="text animation-clrs"></p>
+                    <p class="text animation-clrs"></p>
+                </div>
+                <div class="bx1">
+                    <div class="circle animation-clrs"></div>
+                    <div class="content-div">
+                        <p class="text1 animation-clrs"></p>
+                        <p class="text1 animation-clrs"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        let sub_box_image = document.querySelector(".sub-box")
+        let anim_clr = document.querySelectorAll(".animation-clrs")
+        let heading = document.querySelector(".heading")
+        let text = document.querySelectorAll(".text")
+        let circle = document.querySelector(".circle")
+        let text1 = document.querySelectorAll(".text1")
+        let bx = document.querySelector(".bx")
+        let contentdiv = document.querySelector(".content-div")
+
+        function change(){
+
+            anim_clr.forEach(function(elm){
+                elm.classList.remove("animation-clrs")
+            })
+            sub_box_image.innerHTML = `<img class="image1" src="https://wallpapers.com/images/featured/laptop-murjp1nk4lp1idlt.jpg" alt="">`
+            heading.innerHTML = `
+            <h3>Lorem Ipsum dolor sit amet</h3>
+            `
+            circle.innerHTML = `
+            <img class="image2" src="https://ipic2021.com/wp-content/uploads/2017/10/speaker3-min.jpg" alt="">`
+            bx.innerHTML= `
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing eit . Dolore perfererdis</p>`
+            contentdiv.innerHTML= `
+            <p>John Deo</p>
+            
+            <p>23 04 2022</p>`
+        }
+
+        setTimeout(  change, 3000  )
+        
+
+    </script>
+
+</body>
+
+</html>

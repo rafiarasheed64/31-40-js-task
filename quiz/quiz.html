@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ APP</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            height: max-content;
+            width: 450px;
+            background-color: pink;
+            padding: 20px;
+        }
+        .upperbox{
+            height: 100%;
+            width: 100%;
+            background-color: yellow;
+        }
+        .question{
+            font-size: 20px;
+            text-align: center;
+        }
+        .bx{
+            display: flex;
+            margin-top: 20px;
+        }
+        .options{
+            margin-top: 35px;
+        }
+        li{
+           margin-top: 20px; 
+        }
+
+        .buttonS, .buttonR{
+            height: 50px;
+            width: 100%;
+            margin-top: 20px;
+            background-color: skyblue;
+            font-weight: 800;
+            border: none;
+            display: block;
+        }
+        
+        .buttonR{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="upperbox">
+                <p class="question"></p>    
+                    <ul class="options"></ul>  
+                    <button class="buttonR">RETURN</button>
+                    <button class="buttonS">SUBMIT</button>
+        </div>
+    </div>
+    </div>
+        <script>
+            let buttonS = document.querySelector(".buttonS")
+            let buttonR = document.querySelector(".buttonR")
+            let question= document.querySelector(".question")
+            let options = document.querySelector(".options")
+            let questionArray = [
+                {
+                    ques : "Which language run in a web browser?",
+                    options : ["Java", "C", "Python","Javascript"],
+                    answer : "C"
+                },
+                {
+                    ques : "What does CSS stand for?",
+                    options : ["Central Style Sheets", "Cascading Style Sheets", "Cascading Simple Sheet","Cars SUVs Sailboats"],
+                    answer : "Cascading Style Sheets",
+                },
+                {
+                    ques : "What does HTML stand for?",
+                    options : ["Hypertext Markup Language", "Hypertext Markdown Language", "Hyperloop Machine Language","Helicopters Terminals Motorboats Lamborginis"],
+                    answer : "Hypertext Markup Language"
+                },
+                {
+                    ques : "What year was Javascript launced?",
+                    options : ["1995", "1996", "1997","1998"],
+                    answer : "1995"
+                }
+            ]
+            let score = 0
+            let questionindex = 0
+            function loadQuestion() {
+                let currentQ = questionArray[questionindex]
+                console.log(currentQ);
+                question.innerHTML = currentQ.ques
+                options.innerHTML = ""
+                for (let choice of currentQ.options) {
+                    console.log(choice);
+                    let li = document.createElement("li")
+                    li.textContent = choice
+                    li.addEventListener("click", checkAnswer)
+                    options.appendChild(li)
+                }
+            }
+            loadQuestion()
+            
+            function checkAnswer(event) {
+                let selectedChoice = event.target.innerHTML
+                let currentQ = questionArray[questionindex]
+                if (selectedChoice === currentQ.answer) {
+                    score++
+                }
+                questionindex++
+                console.log(questionindex);
+                if (questionindex < questionArray.length) {
+                    loadQuestion()}
+                else {
+                    question.textContent = `You answered ${score} / ${questionArray.length} question correctly`
+                    options.innerHTML = ""
+                    buttonS.style.display = "none"
+                    buttonR.style.display = "block"
+                    }
+                }
+                buttonR.addEventListener("click", ()=> {
+                    location.reload()     
+                })
+            </script>
+</body>
+</html>

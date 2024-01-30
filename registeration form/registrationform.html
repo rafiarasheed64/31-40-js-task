@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRATION FORM</title>
+    <style>
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            height: 80%;
+            width: 34%;
+            background-color: skyblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cir-div{
+            height: 50px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .line{
+            height: 7px;
+            width: 100%;
+            background-color: rgba(145, 143, 143, 0.363);
+            position: absolute;
+            z-index: 1;
+        }
+        .blue-line{
+            height: 7px;
+            width: 0;
+            background-color: blue;
+            position: absolute;
+            z-index: 2;
+        }
+        .circle{
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            background-color: rgba(145, 143, 143, 0.541);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
+        .active{
+            background-color: blue;
+            color: white;
+        }
+        .text{
+            height: 20px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-div{
+            height: 50%;
+            width: 90%;
+            margin-top: 30px;
+            position: relative;
+        }
+        .inp-div{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .show{
+            opacity: 1;
+            z-index: 111;
+            animation: heightinc 0.4s linear;
+        }
+        @keyframes heightinc {
+            from{
+                height: 0%;
+            }
+            to{
+                height: 100%;
+            }    
+        }
+        input{
+            height: 40px;
+            width: 90%;
+        }
+        .button-div{
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .next, .pervious{
+            padding: 10px;
+            font-size: 17px;
+            background-color: blue;
+            color: white;
+            border: none;
+            margin-top: 20px;
+        }
+        .pervious{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <h3 class=" heading">REGISTRATION FORM</h3>
+            <div class="cir-div">
+                <div class="line"></div>
+                <div class="blue-line"></div>
+                <div class="circle active">1</div>
+                <div class="circle">2</div>
+                <div class="circle">3</div>
+                <div class="circle">4</div>
+            </div>
+            <div class="text">
+                <p>info</p>
+                <p>Contact</p>
+                <p>ID</p>
+                <p>Password</p>
+            </div>
+            <div class="main-div">
+                <div class="inp-div show">
+                    <p>User Name</p>
+                    <input type="text">
+                    <p>Position</p>
+                    <input type="text">
+                </div>
+                <div class="inp-div">
+                    <p>Phone No</p>
+                    <input type="number">
+                    <p>Email</p>
+                    <input type="email">
+                </div>
+                <div class="inp-div">
+                    <p>Date of Birth</p>
+                    <input type="date">
+                    <p>National ID</p>
+                    <input type="number">
+                </div>
+                <div class="inp-div">
+                    <p>Password</p>
+                    <input type="password">
+                    <p>Confirm Password</p>
+                    <input type="password">
+                </div>
+            </div>
+            <div class="button-div">
+                <button class="pervious">Pervious</button>
+                <button class="next">Next</button>
+            </div>
+        </div>
+    </div> 
+    <script>
+        let circle = document.querySelectorAll(".circle")
+        let blueline = document.querySelector(".blue-line")
+        let buttonnext = document.querySelector(".next")
+        let buttonpervious = document.querySelector(".pervious")
+        let inpdiv = document.querySelectorAll(".inp-div")
+        let count = 1
+        function activecircle() {
+            circle.forEach((elem, index) => {
+                if (index < count ) {
+                    elem.classList.add("active")
+                } 
+                else {
+                    elem.classList.remove("active")
+                }
+            })
+            inpdiv.forEach((elem, index) => {
+                if (index < count ) {
+                    remove()
+                    elem.classList.add("show")
+                } 
+                else {
+                    elem.classList.remove("show")
+                }
+            })
+            let activeClass = document.querySelectorAll(".active")
+            blueline.style.width = ` ${((activeClass.length - 1 ) / (circle.length - 1 ) * 100)}% `
+        }
+        buttonnext.addEventListener("click", () => {
+            count++
+            if (count >= circle.length) {
+                count = circle.length 
+                buttonnext.innerHTML = "Submit"  
+            }
+            if(count > 1){
+                buttonpervious.style.visibility = "visible"
+            }
+            activecircle()
+        })
+        buttonpervious.addEventListener("click", () => {
+            count--
+            if(count < 1){
+                count = 1
+                buttonpervious.style.visibility = "hidden"
+            }
+            if(count > 1){
+                    buttonnext.innerHTML = "Next"  
+            }  
+            activecircle()
+        })
+        function remove(){  
+            inpdiv.forEach((ele , idx)=> {
+                ele.classList.remove("show")
+            })
+        }
+
+    </script>
+</body>
+</html>

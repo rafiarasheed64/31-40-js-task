@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR RATING</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100%;
+            background-color: burlywood;
+        }
+
+        .icn {
+            font-size: 25px;
+            display: inline-block;
+            margin-top: 25px;
+            margin-left: 10px;
+            color: rgba(128, 128, 128, 0.5);
+            cursor: pointer;
+        }
+
+        .clr {
+            color: red;
+        }
+        .text {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <i class="bi bi-star-fill icn"></i>
+        <i class="bi bi-star-fill icn"></i>
+        <i class="bi bi-star-fill icn"></i>
+        <i class="bi bi-star-fill icn"></i>
+        <i class="bi bi-star-fill icn"></i>
+        <p class="text">You rated <span class="number"></span> star</p>
+    </div>
+    <script>
+
+        let icn = document.querySelectorAll(".icn")
+        let number = document.querySelector(".number")
+        let events = ["mouseenter", "mouseleave", "click"]
+        let count = 0
+        let starValue
+
+        for (let i = 0; i < icn.length; i++) {
+            icn[i].starValue = i + 1
+            console.log(icn[i].starValue);
+            events.forEach(e => {
+                icn[i].addEventListener(e, eventHandling)
+            })
+        }
+        function eventHandling(e) {
+            let valuee = this.starValue
+            let events = e.type
+            if (events === "click") {
+                number.innerHTML = valuee
+                icn.forEach((ele, idx) => {
+                    if (idx < valuee ) {
+                        ele.classList.add("clr")
+                    }
+                    else{
+                        ele.classList.remove("clr")
+                    }    
+                })
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

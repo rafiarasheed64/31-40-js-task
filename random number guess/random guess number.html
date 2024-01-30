@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Guess Number</title>
+  
+</head>
+<body>
+    <p class="text">Guess a number from 1 to 15</p>
+    <input class="input" type="number">
+    <button class="button">Guess</button>
+    
+    <script>
+        let text = document.querySelector(".text")
+        let input = document.querySelector(".input")
+        let button = document.querySelector(".button")
+        let Guess = 0
+        let randomnumber;
+        GenerateNumber()
+        function GenerateNumber(){
+            randomnumber = Math.floor(Math.random() * 15)
+            console.log(randomnumber);
+        }
+        button.addEventListener("click", ()=>{
+                let InputValue = parseInt(input.value)
+                Guess++
+                if( randomnumber === InputValue ){
+                    text.innerHTML = `Correct guess of ${InputValue} in ${Guess} guesses`
+                    text.style.color = "green"
+                    input.style.border = " 2px solid green"
+                    button.style.backgroundColor = "green"
+                    button.style.color = "white"
+                    button.innerHTML = "Restart Game"
+                    input.style.display = "none"
+                    button.addEventListener("click", function(){
+                        location.reload()
+                    })
+                }
+                else if( input.value > randomnumber ){
+                    text.innerHTML ="Random Number Was lower"
+                    text.style.color = "blue"
+                    input.style.border = " 2px solid blue"
+                    button.style.backgroundColor = "blue"
+                    button.style.color = "white"
+                }
+                if( input.value < randomnumber ){
+                    text.innerHTML ="Random Number Was higher"
+                    text.style.color = "purple"
+                    input.style.border = " 2px solid purple"
+                    button.style.backgroundColor = "purple"
+                    button.style.color = "white"
+                }
+            })
+    </script>
+</body>
+</html> 
